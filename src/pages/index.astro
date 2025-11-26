@@ -44,7 +44,7 @@ const posts = await getCollection('blog');
           <p class="text-light-muted dark:text-dark-muted">No posts yet.</p>
         )}
         {posts.map((post) => (
-          <a href={`/blog/${post.slug}`} class="block group">
+          <a href={`/blog/${post.slug}`} class="block group border border-light-border dark:border-dark-border rounded-xl p-6 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">
             <h3 class="text-lg font-medium text-light-text dark:text-dark-text group-hover:text-light-accent dark:group-hover:text-dark-accent transition-colors">
               {post.data.title}
             </h3>
