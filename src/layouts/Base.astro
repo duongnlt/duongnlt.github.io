@@ -11,6 +11,7 @@ const { title, description = config.description } = meta || {};
 <html lang={config.lang}>
   <head>
     <Header />
+    <title>{title ? `${title} | Duong Nguyen` : 'Duong Nguyen'}</title>
     <script is:inline>
       // It's best to inline this in `head` to avoid FOUC
       if (
