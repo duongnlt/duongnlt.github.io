@@ -9,13 +9,15 @@ const posts = (await getCollection('blog')).sort(
 
 <Base meta={{ title: 'Blog' }}>
   <section>
-    <h1 class="text-3xl font-bold mb-8 text-light-text dark:text-dark-text">Blog</h1>
+    <h1 class="text-3xl font-bold mb-8 text-light-text dark:text-dark-text">Welcome to my blog</h1>
+    <p class="text-light-text dark:text-dark-text text-lg mb-8">Here you can find my thoughts and ideas about AI, Machine Learning, Computer Vision, and more ...</p>
+
     <ul class="space-y-8">
       {
         posts.map((post) => (
           <li>
-            <a href={`/blog/${post.slug}/`} class="block group">
-              <h2 class="text-xl font-semibold text-light-text dark:text-dark-text group-hover:text-light-accent dark:group-hover:text-dark-accent transition-colors">
+            <a href={`/blog/${post.slug}/`} class="block group border border-light-border dark:border-dark-border rounded-xl p-6 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">
+              <h2 class="text-xl font-bold text-light-text dark:text-dark-text group-hover:text-light-accent dark:group-hover:text-dark-accent transition-colors mb-5">
                 {post.data.title}
               </h2>
               <p class="text-sm text-light-muted dark:text-dark-muted mt-1">
