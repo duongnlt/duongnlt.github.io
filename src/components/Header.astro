@@ -1,0 +1,22 @@
+---
+// import config from '../config'
+interface Props {
+  title?: string
+  description?: string
+}
+
+// const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+
+const { title, description } = Astro.props
+
+// const siteTitle = title ?? config.title
+// const siteDescription = description ?? config.description
+---
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Canonical URL -->
+<!-- <link rel="canonical" href={canonicalURL} /> -->

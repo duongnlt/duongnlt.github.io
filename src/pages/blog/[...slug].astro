@@ -1,0 +1,75 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: post,
+	}));
+}
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content, headings } = await post.render();
+
+// Calculate reading time (average reading speed: 200 words per minute)
+const content = post.body;
+const wordCount = content.trim().split(/\s+/).length;
+const readingTime = Math.ceil(wordCount / 200);
+---
+
+<Base meta={{ title: post.data.title, description: post.data.description }}>
+  <article class="prose dark:prose-dark max-w-none text-light-text dark:text-dark-text">
+    <!-- Title -->
+    <h1 class="text-4xl font-bold mb-4 text-light-text dark:text-dark-text">{post.data.title}</h1>
+    
+    <!-- Metadata: Date and Reading Time -->
+    <div class="flex items-center gap-3 text-sm text-light-muted dark:text-dark-muted mb-8 pb-8 border-b border-light-border dark:border-dark-border">
+      <time datetime={post.data.pubDate.toISOString()}>
+        {
+          post.data.pubDate.toLocaleDateString('en-us', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })
+        }
+      </time>
+      <span>·</span>
+      <span>{readingTime} min read</span>
+    </div>
+
+    <!-- Table of Contents -->
+    {headings && headings.length > 0 && (
+      <details class="mb-8 border border-light-border dark:border-dark-border rounded-lg p-4 bg-light-bg dark:bg-gray-900" open>
+        <summary class="cursor-pointer text-lg font-semibold text-light-text dark:text-dark-text mb-4">
+          Table of Contents
+        </summary>
+        <ul class="list-disc pl-6 space-y-1.5">
+          {headings.map((heading) => {
+            const isH2 = heading.depth === 2;
+            const isH3 = heading.depth === 3;
+            return (
+              <li class={isH3 ? 'ml-6' : ''}>
+                <a 
+                  href={`#${heading.slug}`}
+                  class="text-light-text dark:text-dark-text hover:text-light-accent dark:hover:text-dark-accent no-underline transition-colors"
+                >
+                  {heading.text}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </details>
+    )}
+
+    <!-- Post content -->
+    <div class="text-light-text dark:text-dark-text">
+      <Content />
+    </div>
+  </article>
+</Base>
+
+

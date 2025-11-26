@@ -1,0 +1,39 @@
+---
+import config from '../config'
+import Header from '../components/Header.astro'
+import Nav from '../components/Nav.astro'
+
+
+const { meta } = Astro.props;
+const { title, description = config.description } = meta || {};
+---
+
+<html lang={config.lang}>
+  <head>
+    <Header />
+    <script is:inline>
+      // It's best to inline this in `head` to avoid FOUC
+      if (
+        localStorage.getItem('color-theme') === 'dark' ||
+        (!('color-theme' in localStorage) &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+  </head>
+  <body
+    class="scrollbar scrollbar-thumb-light-accent dark:scrollbar-thumb-dark-accent mx-auto max-w-[900px] px-5 transition-colors duration-300
+    bg-light-bg text-light-text font-sans
+    dark:bg-dark-bg dark:text-dark-text"
+  >
+    <Nav/>
+    <main
+      class="w500:min-h-[calc(100dvh-110px-70px)] min-h-[calc(100dvh-90px-70px)] py-10"
+    >
+      <slot />
+    </main>
+  </body>
+</html>
