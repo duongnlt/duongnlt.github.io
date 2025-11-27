@@ -10,7 +10,7 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['Inter', ...defaultTheme.fontFamily.sans],
-				serif: ['Playfair Display', ...defaultTheme.fontFamily.serif],
+				heading: ['Outfit', ...defaultTheme.fontFamily.sans],
 				mono: ['JetBrains Mono', ...defaultTheme.fontFamily.mono],
 			},
 			colors: {
@@ -36,7 +36,7 @@ export default {
 						color: theme('colors.light.text'),
 						fontFamily: theme('fontFamily.sans'),
 						'h1, h2, h3, h4': {
-							fontFamily: theme('fontFamily.serif'),
+							fontFamily: theme('fontFamily.heading'),
 							fontWeight: '700',
 						},
 						a: {
