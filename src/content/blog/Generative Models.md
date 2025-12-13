@@ -1,3 +1,9 @@
+---
+title: "Generative Models"
+description: "From ancient history to current trends in the thema of generative models"
+pubDate: "2025-12-13"
+---
+
 # A Review of Probability
 
 Before going directly into how these methods work and all the math behind them, let first take a quick review of probability:
