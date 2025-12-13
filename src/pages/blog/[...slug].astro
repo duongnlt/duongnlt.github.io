@@ -46,12 +46,11 @@ const readingTime = Math.ceil(wordCount / 200);
         <summary class="cursor-pointer text-lg font-semibold text-light-text dark:text-dark-text mb-4">
           Table of Contents
         </summary>
-        <ul class="list-disc pl-6 space-y-1.5">
+        <ul class="list-none pl-0 space-y-1.5">
           {headings.map((heading) => {
-            const isH2 = heading.depth === 2;
-            const isH3 = heading.depth === 3;
+            const indent = (heading.depth - 2) * 4; // H2=0, H3=4, H4=8, etc.
             return (
-              <li class={isH3 ? 'ml-6' : ''}>
+              <li style={`margin-left: ${indent * 0.25}rem`}>
                 <a 
                   href={`#${heading.slug}`}
                   class="text-light-text dark:text-dark-text hover:text-light-accent dark:hover:text-dark-accent !no-underline transition-colors"
